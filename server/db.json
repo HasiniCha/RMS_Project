@@ -1,0 +1,123 @@
+{
+  "users": [
+    {
+      "id": "8b88",
+      "userID": "",
+      "firstName": "John",
+      "lastName": "Johnson",
+      "designation": "Manager",
+      "email": "user123@example.com",
+      "password": "P@ssw0rd123",
+      "validFrom": "2024-02-14T18:36",
+      "validTill": "2024-02-09T18:36"
+    },
+    {
+      "id": "8b89",
+      "userID": "",
+      "firstName": "Sarah",
+      "lastName": "Smith",
+      "designation": "Engineer",
+      "email": "sarahsmith@example.com",
+      "password": "S@rahPwd456",
+      "validFrom": "2024-02-14T18:36",
+      "validTill": "2024-02-09T18:36"
+    },
+    {
+      "id": "8b90",
+      "userID": "",
+      "firstName": "Michael",
+      "lastName": "Williams",
+      "designation": "Consultant",
+      "email": "michaelw@example.com",
+      "password": "M1ch@elPwd789",
+      "validFrom": "2024-02-14T18:36",
+      "validTill": "2024-02-09T18:36"
+    },
+    {
+      "id": "8b91",
+      "userID": "",
+      "firstName": "Emily",
+      "lastName": "Brown",
+      "designation": "Analyst",
+      "email": "ebrown@example.com",
+      "password": "BrownPwd123!",
+      "validFrom": "2024-02-14T18:36",
+      "validTill": "2024-02-09T18:36"
+    },
+    {
+      "id": "8b92",
+      "userID": "",
+      "firstName": "David",
+      "lastName": "Jones",
+      "designation": "Specialist",
+      "email": "djones@example.com",
+      "password": "Dav1dJ0nes!",
+      "validFrom": "2024-02-14T18:36",
+      "validTill": "2024-02-09T18:36"
+    },
+    {
+      "id": "8b93",
+      "userID": "",
+      "firstName": "Jessica",
+      "lastName": "Miller",
+      "designation": "Director",
+      "email": "jmiller@example.com",
+      "password": "J3ss1caPwd",
+      "validFrom": "2024-02-14T18:36",
+      "validTill": "2024-02-09T18:36"
+    },
+    {
+      "id": "8b94",
+      "userID": "",
+      "firstName": "Daniel",
+      "lastName": "Davis",
+      "designation": "Coordinator",
+      "email": "ddavis@example.com",
+      "password": "D@nielPwd456",
+      "validFrom": "2024-02-14T18:36",
+      "validTill": "2024-02-09T18:36"
+    },
+    {
+      "id": "82c0",
+      "userID": "Ann@gmail.com",
+      "firstName": "Ann",
+      "lastName": "Doe",
+      "designation": "Receptionist",
+      "email": "Ann@gmail.com",
+      "password": "qwer!@1234e",
+      "validFrom": "2024-02-21T22:19",
+      "validTill": "2026-10-19T22:19"
+    },
+    {
+      "id": "0932",
+      "userID": "Ann@gmail.com",
+      "firstName": "Anne",
+      "lastName": "Doe",
+      "designation": "Receptionist",
+      "email": "Ann@gmail.com",
+      "password": "qwerty!@12345",
+      "validFrom": "2024-02-07T22:26",
+      "validTill": "2026-10-13T22:26"
+    }
+  ],
+  "company": [
+    {
+      "id": "0001",
+      "name": "ABC"
+    },
+    {
+      "id": "0002",
+      "name": "DEF"
+    }
+  ],
+  "roles": [
+    {
+      "id": "0001",
+      "name": "Reservation Officer"
+    },
+    {
+      "id": "0002",
+      "name": "View Officer"
+    }
+  ]
+}
