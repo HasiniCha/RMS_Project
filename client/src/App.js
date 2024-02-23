@@ -7,9 +7,9 @@ import Tab from './pages/UserOverview'
 function App() {
   return (
   <Routes>
-    <Route path="/" element={<CreateUser />} />
-    <Route path="/userlist" element={<UserList />} />
-    <Route path="/useroverview/:value" element={<Tab />} />
+    <Route path="/" element={<UserList />} />
+    <Route path="/createUser" element={<CreateUser />} />
+    <Route path="/userOverview/:value" element={<Tab />} />
  
   </Routes> 
   

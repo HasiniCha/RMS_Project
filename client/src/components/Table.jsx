@@ -1,19 +1,11 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
-
-
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import More from "../components/More";
 import Check from "../components/checkbox";
 
-const Table = ({ columns, data,  handleCheckboxChange, checkedValues }) => {
-  const navigate = useNavigate();
+const Table = ({ columns, data,  handleCheckboxChange, checkedValues ,search}) => {
+ 
 
-  const handleArrowClick = (data) => {
-    navigate(`/useroverview/${data.userid}`);
-    console.log("Here table click:",data.userid);
-};
   return (
     <div className="d-flex align-items-stretch">
       
@@ -27,7 +19,8 @@ const Table = ({ columns, data,  handleCheckboxChange, checkedValues }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((userdata) => (
+          {data.filter((userdata)=>{return search.toLowerCase()===''?userdata:userdata.email.toLowerCase().includes(search);})
+          .map((userdata) => (
             <tr key={userdata.id}>
               <td style={{ display: "flex", alignItems: "center" }}>
                 <Check
@@ -36,7 +29,7 @@ const Table = ({ columns, data,  handleCheckboxChange, checkedValues }) => {
                   onCheckboxChange={handleCheckboxChange}
                 />
                 <div style={{ margin: "8px" }}>
-                <More value={userdata.id} handleArrowClick={handleArrowClick} />
+                <More value={userdata.id}  />
                 </div>
               </td>
               {columns.map((column, index) => (

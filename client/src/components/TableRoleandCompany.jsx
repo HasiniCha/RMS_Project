@@ -14,15 +14,15 @@ const Table = ({ columns, data, grant, checkedValues }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((userdata, index) => (
-            <tr key={index}>
+          {data.map((userdata) => (
+            <tr key={userdata.id}>
               <td>{userdata.id}</td>
               <td>{userdata.name}</td>
               <td>
                 <Check
                   value={userdata.id}
-                  isChecked={checkedValues.includes(userdata.id)}
-                  onCheckboxChange={(isChecked) => grant(isChecked, userdata.id)}
+                  isChecked={checkedValues.includes(userdata.name)}
+                  onCheckboxChange={(isChecked) => grant(isChecked, userdata.name)}
                 />
               </td>
             </tr>

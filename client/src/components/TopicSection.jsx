@@ -5,20 +5,11 @@ import { useNavigate } from 'react-router-dom';
 // import { useState } from 'react';
 import SearchBar from  "../components/SearchBar";
 
-const Topic = ({ topic, showInputGroup1, showInputGroup2  ,showCreate,showEdit,showSave,showDelete,DeleteClick,SaveClick,EditClick}) => {
+const Topic = ({ topic, showInputGroup1, showInputGroup2  ,showCreate,showEdit,showSave,showDelete,DeleteClick,SaveClick,EditClick,search,setSearch}) => {
   const navigate = useNavigate();
 
   const createUser = () => {
-    navigate('/');
-  };
-  
-  // const [searchResults, setSearchResults] = useState([]);
-
-  const handleSearch = (query) => {
-    // Perform search logic here, for example, make an API call
-    // and update the searchResults state
-    console.log('Searching for:', query);
-    // Example: setSearchResults(newSearchResults);
+    navigate('/createUser');
   };
 
 
@@ -43,7 +34,7 @@ const Topic = ({ topic, showInputGroup1, showInputGroup2  ,showCreate,showEdit,s
         </div>
         {showInputGroup1 && (
           <div className="col-md-4">
-           <SearchBar onSearch={handleSearch} />
+           <SearchBar search={search} setSearch={setSearch}/>
           </div>
         )}
 
