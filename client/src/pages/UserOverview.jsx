@@ -60,7 +60,7 @@ const Data = () => {
     setDisplay(!display);
   };
 
-  const userId = "8b89";
+  const id = value;
 
   const fetchData = async (id) => {
     try {
@@ -69,13 +69,18 @@ const Data = () => {
       const responseRole = await api.get(`/roles`);
 
       setUserData({
+        userID:response.data.email,
         firstName: response.data.firstName,
         lastName: response.data.lastName,
         designation: response.data.designation,
         email: response.data.email,
-        validfrom: response.data.validFrom,
+        password:response.data.password,
+        validFrom: response.data.validFrom,
         validTill: response.data.validTill,
+        companies:response.data.companies,
+        roles:response.data.roles
       });
+       
       setCompanyData(responseCompany.data);
       setRoleData(responseRole.data);
     } catch (error) {
@@ -85,20 +90,40 @@ const Data = () => {
   };
 
   const handleSave = async () => {
-    try {
-      await api.put(`/users/${userId}`, userData);
-      setEditMode(false);
-    } catch (error) {
-      console.error("Error saving data:", error);
+    if (activeTab === "General") {
+      try {
+        const updatedUserData = {
+          id: id,
+          ...userData,
+          userID:userData.email,
+        };
+        await api.put(`/users/${id}`, updatedUserData);
+        setEditMode(false);
+      } catch (error) {
+        console.error("Error saving data:", error);
+      }
+    } else if (activeTab === "Companies") {
+      const updatedUserData = {
+        ...userData,
+        companies:checkedCompanyValues
+      };
+      await api.put(`/users/${id}`, updatedUserData);
+  
+    } else if (activeTab === "Roles") {
+      const updatedUserData = {
+        ...userData,
+ roles:checkedRoleValues
+      };
+      await api.put(`/users/${id}`, updatedUserData);
     }
-  };
+  }
 
   const handleEditClick = () => {
     setEditMode(true);
   };
 
   useEffect(() => {
-    fetchData(userId);
+    fetchData(id);
   }, []);
 
   const handleInputChange = (e) => {
@@ -141,8 +166,8 @@ const Data = () => {
                 showInputGroup1={false}
                 showInputGroup2={true}
                 showCreate={activeTab === "General" ? true : false}
-                showEdit={activeTab === "General" ? true : false}
-                showSave={editMode}
+                showEdit={activeTab === "General" ? !editMode:false}
+                showSave={activeTab === "General" ? editMode:true}
                 showDelete={false}
                 SaveClick={handleSave}
                 EditClick={handleEditClick}
@@ -167,6 +192,13 @@ const Data = () => {
                   <div style={{ margin: 10, padding: 20 }}>
                     {editMode ? (
                       <>
+      <TextField
+                  id="userID"
+                  type="text"
+                  text="User ID:"
+                  value={userData.email}
+                  disabled
+                />
                         <TextField
                           id="firstName"
                           type="text"
@@ -199,7 +231,7 @@ const Data = () => {
                           id="validFrom"
                           type="text"
                           text="Valid From:"
-                          value={userData.validfrom}
+                          value={userData.validFrom}
                           onChange={handleInputChange}
                         />
                         <TextField
@@ -212,6 +244,13 @@ const Data = () => {
                       </>
                     ) : (
                       <>
+                      <TextField
+                  id="userID"
+                  type="text"
+                  text="User ID:"
+                  value={userData.email}
+                  disabled
+                />
                         <TextField
                           id="firstName"
                           type="text"
@@ -244,7 +283,7 @@ const Data = () => {
                           id="validFrom"
                           type="text"
                           text="Valid From:"
-                          value={userData.validfrom}
+                          value={userData.validFrom}
                           disabled
                         />
                         <TextField

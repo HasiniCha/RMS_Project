@@ -7,9 +7,9 @@ import NavTop from "../components/NavTop";
 import NavLeft from "../components/NavLeft";
 import { Col, Container, Row } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../utils/constant";
+import {toastFunction} from "../components/toastFunction";
 
 const Main = () => {
   const [formData, setFormData] = useState({
@@ -21,60 +21,45 @@ const Main = () => {
     password: "",
     validFrom: "",
     validTill: "",
+    companies:"",
+    roles:""
   });
 
   const [formSubmitted, setFormSubmitted] = useState(false);
-
+  
   //input_change
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    
+  
     // Check if the input being changed is the email field
     if (id === 'email') {
       // If it's the email field, update both email and userID with the same value
-      setFormData({
-        ...formData,
+      setFormData(prevState => ({
+        ...prevState,
         email: value,
         userID: value, // Assuming userID is also updated with the email value
-      });
+      }));
     } else {
       // For other fields, update normally
-      setFormData({
-        ...formData,
+      setFormData(prevState => ({
+        ...prevState,
         [id]: value,
-      });
+      }));
     }
   };
   // Form validation
   const validateForm = () => {
     const { firstName, lastName, designation, email, password, validFrom, validTill } = formData;
     if (!firstName || !lastName || !designation || !email || !password || !validFrom || !validTill) {
-      toast.error("All fields are required", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      toastFunction("All fields are required",true);
       return false;
     }
 
     // Password validation
     const passwordRegex = /^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!passwordRegex.test(password)) {
-      toast.error("Password must be at least 8 characters long and contain at least  one number, and one special character", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      
+ toastFunction("Password must be at least 8 characters long and contain at least  one number, and one special character",true);
       return false;
     }
 
@@ -88,31 +73,14 @@ const Main = () => {
     try {
       const response = await api.post("/users", formData);
       if (response.status === 201) {
-        toast.success("Added Details Successfully", {
-          position: "top-right",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+      
+          toastFunction("Added Details Successfully",false);
         setFormSubmitted(true);
       } else {
       }
     } catch (error) {
-      console.error("Error:", error);
-      toast.error("Something went wrong!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      console.error("Error:", error);         
+        toastFunction("Something went wrong!",true);
     }
   };
 
@@ -171,18 +139,7 @@ const Main = () => {
                       Submit
                     </Button>
                   </div>
-                  <ToastContainer
-                    position="bottom-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="colored"
-                  />
+               
                 </div>
               </Form>
             </div>
@@ -194,3 +151,4 @@ const Main = () => {
 };
 
 export default Main;
+

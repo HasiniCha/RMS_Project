@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import TopicField from "../components/TopicSection";
 import { Col } from "react-bootstrap";
 import NavTop from "../components/NavTop";
 import NavLeft from "../components/NavLeft";
 import Table from "../components/Table";
 import { Container,Row, } from "react-bootstrap";
-import { toast, ToastContainer } from "react-toastify";
+import {toastFunction} from '../components/toastFunction';
+
 import api from "../utils/constant";
 
 
@@ -17,7 +17,6 @@ const Main = () => {
     [""],
     ["firstName"],
     ["lastName"],
-    ["Companies"],
     ["designation"],
     ["email"],
     ["validFrom"],
@@ -26,6 +25,10 @@ const Main = () => {
 
   const [userData, setUserData] = useState([]);
   const [checkedValues, setCheckedValues] = useState([]);
+  const [search, setSearch] = useState('');
+
+  
+
 
   const handleCheckboxChange = (isChecked, value) => {
     if (isChecked) {
@@ -39,17 +42,7 @@ const Main = () => {
 
   const handleDeleteSelected = () => {
     checkedValues.forEach((id) => deleteUser(id));
-    toast.success('Deleted Successfully', {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    
-      });
+   
   };
     
   const fetchData = async () => {
@@ -69,6 +62,7 @@ const Main = () => {
   const deleteUser = async (id) => {
     try {
       await api.delete(`/users/${id}`);
+      toastFunction("Deleted Successfully",false)
       fetchData();
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -90,26 +84,14 @@ const Main = () => {
                 borderRadius: "10px",
               }}
             >
-              <TopicField  topic="Users" showInputGroup1={true} showInputGroup2={true} showCreate={true} showDelete={true} showSave={false} showEdit={false} DeleteClick={handleDeleteSelected}  />
-              <Table columns={tableData} data={userData}  handleCheckboxChange={handleCheckboxChange} checkedValues={checkedValues}  />
+              <TopicField  topic="Users" showInputGroup1={true} showInputGroup2={true} showCreate={true} showDelete={true} showSave={false} showEdit={false} DeleteClick={handleDeleteSelected} search={search} setSearch={setSearch}  />
+              <Table columns={tableData} data={userData}  handleCheckboxChange={handleCheckboxChange} checkedValues={checkedValues} search={search} />
 
             </div>
           </Col>
         </Row>
       </Container>
-      <ToastContainer
-position="top-right"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="colored"
-
-/>
+    
     </div>
   );
 };
