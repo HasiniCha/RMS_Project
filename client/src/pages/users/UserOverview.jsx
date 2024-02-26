@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import { Col } from "react-bootstrap";
-import NavTop from "../components/NavTop";
-import NavLeft from "../components/NavLeft";
+import NavTop from "../../components/NavTop";
+import NavLeft from "../../components/NavLeft";
 import { Container, Row } from "react-bootstrap";
-import TopicField from "../components/TopicSection";
-import TextField from "../components/TextField";
-import api from "../utils/constant";
-import TableCompany from "../components/TableRoleandCompany";
+import TopicField from "../../components/TopicSection";
+import TextField from "../../components/TextField";
+import TableCompany from "../../components/TableRoleandCompany";
 import { useParams } from 'react-router-dom';
+// import { BASE_URL, USER_URL, api } from "../../utils/Constant";
+import api from "../../utils/Constants";
 
 const Data = () => {
   const [userData, setUserData] = useState({});
@@ -18,7 +19,7 @@ const Data = () => {
   const [checkedCompanyValues, setCheckedCompanyValues] = useState([]);
   const [checkedRoleValues, setCheckedRoleValues] = useState([]); 
   const [editMode, setEditMode] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+
   const [display, setDisplay] = useState([false]);
   
  
@@ -26,9 +27,7 @@ const Data = () => {
 
   
 
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-  };
+
 
   const grant = (isChecked, value, table) => {
     if (table === 'company') {
@@ -66,7 +65,7 @@ const Data = () => {
     try {
       const response = await api.get(`/users/${id}`);
       const responseCompany = await api.get(`/company`);
-      const responseRole = await api.get(`/roles`);
+      const responseRole = await  api.get(`/roles`);
 
       setUserData({
         userID:response.data.email,
@@ -171,7 +170,7 @@ const Data = () => {
                 showDelete={false}
                 SaveClick={handleSave}
                 EditClick={handleEditClick}
-                SearchBar={handleSearch}
+           
               />
               <Tabs
                 id="fill-tab-example"

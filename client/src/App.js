@@ -1,8 +1,8 @@
 import React from "react";
-import CreateUser from "./pages/CreateUsers";
+import CreateUser from "./pages/users/CreateUsers";
 import { Route,Routes } from "react-router-dom"
-import UserList from './pages/UserList'
-import Tab from './pages/UserOverview'
+import UserList from './pages/users/UserList'
+import Tab from './pages/users/UserOverview'
 
 function App() {
   return (
