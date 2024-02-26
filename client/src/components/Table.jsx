@@ -19,7 +19,7 @@ const Table = ({ columns, data,  handleCheckboxChange, checkedValues ,search}) =
           </tr>
         </thead>
         <tbody>
-          {data.filter((userdata)=>{return search.toLowerCase()===''?userdata:userdata.email.toLowerCase().includes(search);})
+          {data.filter((userdata)=>{return search.toLowerCase()===''? userdata:userdata.firstName.toLowerCase().includes(search);})
           .map((userdata) => (
             <tr key={userdata.id}>
               <td style={{ display: "flex", alignItems: "center" }}>

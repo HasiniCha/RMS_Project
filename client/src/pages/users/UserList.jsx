@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import TopicField from "../components/TopicSection";
+import TopicField from "../../components/TopicSection";
 import { Col } from "react-bootstrap";
-import NavTop from "../components/NavTop";
-import NavLeft from "../components/NavLeft";
-import Table from "../components/Table";
+import NavTop from "../../components/NavTop";
+import NavLeft from "../../components/NavLeft";
+import Table from "../../components/Table";
 import { Container,Row, } from "react-bootstrap";
-import {toastFunction} from '../components/toastFunction';
+import {toastFunction} from '../../components/ToastFunction';
+import api from "../../utils/Constants";
 
-import api from "../utils/constant";
+
 
 
 const Main = () => {

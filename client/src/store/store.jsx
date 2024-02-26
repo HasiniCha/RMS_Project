@@ -1,17 +1,22 @@
-import {createStore,combineReducers,applyMiddleware} from "redux";
-import {thunk} from "redux-thunk";
+// import {createStore,combineReducers,applyMiddleware} from "redux";
+// import {thunk} from "redux-thunk";
 
-const middleware=[thunk];
 
-const rootReducer = combineReducers([
 
-//state
-])
+// import{
+//     getUserInfo,
+// }from './reducers/postReducer';
 
-const store =createStore(
-    rootReducer,
-    applyMiddleware(...middleware)
-);
+// const middleware=[thunk];
 
-export default store;
+// const rootReducer = combineReducers({
+//     getUsers: getUserInfo,
+// })
+
+// const store =createStore(
+//     rootReducer,
+//     applyMiddleware(...middleware)
+// );
+
+// export default store;
 
