@@ -9,10 +9,15 @@ import TopicField from "../../components/TopicSection";
 import TextField from "../../components/TextField";
 import TableCompany from "../../components/TableRoleandCompany";
 import { useParams } from 'react-router-dom';
-// import { BASE_URL, USER_URL, api } from "../../utils/Constant";
-import api from "../../utils/Constants";
+import {BASE_URL,USER_URL,COMPANY_URL,ROLE_URL} from "../../utils/Constants";
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserData } from '../../store/actions/RmsActions'; 
 
 const Data = () => {
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.users);
+ 
   const [userData, setUserData] = useState({});
   const [companyData, setCompanyData] = useState([]);
   const [roleData, setRoleData] = useState([]);
@@ -63,9 +68,9 @@ const Data = () => {
 
   const fetchData = async (id) => {
     try {
-      const response = await api.get(`/users/${id}`);
-      const responseCompany = await api.get(`/company`);
-      const responseRole = await  api.get(`/roles`);
+      const response=await dispatch(fetchUserData(id)); 
+      const responseCompany = await axios.get(`${BASE_URL}${COMPANY_URL}`);
+      const responseRole = await  axios.get(`${BASE_URL}${ROLE_URL}`);
 
       setUserData({
         userID:response.data.email,
@@ -96,7 +101,7 @@ const Data = () => {
           ...userData,
           userID:userData.email,
         };
-        await api.put(`/users/${id}`, updatedUserData);
+        await axios.put(`${BASE_URL}${USER_URL}${id}`, updatedUserData);  
         setEditMode(false);
       } catch (error) {
         console.error("Error saving data:", error);
@@ -106,14 +111,14 @@ const Data = () => {
         ...userData,
         companies:checkedCompanyValues
       };
-      await api.put(`/users/${id}`, updatedUserData);
+      await axios.put(`${USER_URL}/${id}`, updatedUserData);
   
     } else if (activeTab === "Roles") {
       const updatedUserData = {
         ...userData,
  roles:checkedRoleValues
       };
-      await api.put(`/users/${id}`, updatedUserData);
+      await {BASE_URL}.put(`${USER_URL}/${id}`, updatedUserData);
     }
   }
 

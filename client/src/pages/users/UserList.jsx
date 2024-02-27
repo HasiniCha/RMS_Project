@@ -6,13 +6,16 @@ import NavLeft from "../../components/NavLeft";
 import Table from "../../components/Table";
 import { Container,Row, } from "react-bootstrap";
 import {toastFunction} from '../../components/ToastFunction';
-import api from "../../utils/Constants";
-
+import {BASE_URL, USER_URL} from "../../utils/Constants";
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData } from '../../store/actions/RmsActions'; 
 
 
 
 const Main = () => {
-
+  const dispatch = useDispatch();
+   const users = useSelector(state => state.users);
  
   const [tableData] = useState([
     [""],
@@ -46,29 +49,31 @@ const Main = () => {
    
   };
     
-  const fetchData = async () => {
-  try {
-    const response = await api.get(`/users`);
+//   const fetchData = async () => {
+//   try {
+//     const response = await axios.get(`${BASE_URL}${USER_URL}`);
    
-    setUserData(response.data);
-  } catch(error) {
-    console.error("Error fetching data:", error);
-  }
-}
-  useEffect(() => {
-   
-    fetchData();
-  }, []); 
+//     setUserData(response.data);
+//   } catch(error) {
+//     console.error("Error fetching data:", error);
+//   }
+// }
+
+useEffect(() => {
+  dispatch(fetchData());
+}, [dispatch]);
+
 
   const deleteUser = async (id) => {
     try {
-      await api.delete(`/users/${id}`);
+      await axios.delete(`${BASE_URL}${USER_URL}/${id}`);
       toastFunction("Deleted Successfully",false)
       fetchData();
     } catch (error) {
       console.error("Error deleting user:", error);
     }
   };
+
 
 
   return (
