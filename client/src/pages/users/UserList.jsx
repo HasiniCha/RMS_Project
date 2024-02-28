@@ -6,12 +6,17 @@ import NavLeft from "../../components/NavLeft";
 import Table from "../../components/Table";
 import { Container,Row, } from "react-bootstrap";
 import {toastFunction} from '../../components/ToastFunction';
-import api from "../../utils/Constants";
-
-
+import {BASE_URL, USER_URL} from "../../utils/Constants";
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData,deleteUser } from '../../store/actions/RmsActions'; 
+import { selectUserData } from '../../store/Stores';
 
 
 const Main = () => {
+ 
+   const dispatch = useDispatch();
+   const userData = useSelector(selectUserData);
 
  
   const [tableData] = useState([
@@ -24,7 +29,6 @@ const Main = () => {
     ["validTill"],
   ]);
 
-  const [userData, setUserData] = useState([]);
   const [checkedValues, setCheckedValues] = useState([]);
   const [search, setSearch] = useState('');
 
@@ -42,33 +46,29 @@ const Main = () => {
   };
 
   const handleDeleteSelected = () => {
-    checkedValues.forEach((id) => deleteUser(id));
+    checkedValues.forEach((id) => deleteUsers(id));
    
   };
     
-  const fetchData = async () => {
-  try {
-    const response = await api.get(`/users`);
-   
-    setUserData(response.data);
-  } catch(error) {
-    console.error("Error fetching data:", error);
-  }
-}
-  useEffect(() => {
-   
-    fetchData();
-  }, []); 
 
-  const deleteUser = async (id) => {
-    try {
-      await api.delete(`/users/${id}`);
-      toastFunction("Deleted Successfully",false)
-      fetchData();
-    } catch (error) {
-      console.error("Error deleting user:", error);
+
+useEffect(() => {
+  dispatch(fetchData());
+}, [dispatch]);
+
+
+
+  const deleteUsers = async (id) => {
+    try{
+      dispatch(deleteUser(id));
+      
+    }catch(error){
+      console.log(error);
     }
+    toastFunction("Deleted Successfully", false);
+    
   };
+
 
 
   return (
@@ -86,7 +86,7 @@ const Main = () => {
               }}
             >
               <TopicField  topic="Users" showInputGroup1={true} showInputGroup2={true} showCreate={true} showDelete={true} showSave={false} showEdit={false} DeleteClick={handleDeleteSelected} search={search} setSearch={setSearch}  />
-              <Table columns={tableData} data={userData}  handleCheckboxChange={handleCheckboxChange} checkedValues={checkedValues} search={search} />
+              <Table columns={tableData} data={userData.users}  handleCheckboxChange={handleCheckboxChange} checkedValues={checkedValues} search={search} />
 
             </div>
           </Col>

@@ -1,36 +1,21 @@
 {
   "users": [
     {
-      "id": "4567",
-      "userID": "EmssiliarClark@gmail.com",
-      "firstName": "rob",
-      "lastName": "Clark",
-      "designation": "actress",
-      "email": "EmssiliarClark@gmail.com",
-      "password": "qwer@123",
-      "validFrom": "2024-02-07T21:1",
-      "validTill": "2024-02-07T21:1",
-      "companies": [
-        "ABC",
-        "DEF"
-      ],
-      "roles": [
-        "Reservation Officer",
-        "View Officer"
-      ]
-    },
-    {
-      "id": "e484",
       "userID": "hasinichamodi4@gmail.com",
       "firstName": "someone",
       "lastName": "ni",
-      "designation": "s",
+      "designation": "fffffffffffffg",
       "email": "hasinichamodi4@gmail.com",
-      "password": "qwer@1234",
-      "validFrom": "2024-02-29T07:08",
-      "validTill": "2024-02-21T07:08",
-      "companies": "",
-      "roles": ""
+      "password": "wertyui@12345678",
+      "validFrom": "2024-02-14T09:03",
+      "validTill": "2024-02-16T09:03",
+      "companies": [
+        "ABC"
+      ],
+      "roles": [
+        "View Officer"
+      ],
+      "id": "e127"
     }
   ],
   "company": [

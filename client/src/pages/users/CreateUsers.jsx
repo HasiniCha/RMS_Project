@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import api from "../../utils/Constants";
+import {BASE_URL,USER_URL} from "../../utils/Constants";
 import TextField from "../../components/TextField";
 import TopicField from "../../components/TopicSection";
 import Button from "react-bootstrap/Button";
 import NavTop from "../../components/NavTop";
 import NavLeft from "../../components/NavLeft";
+import { useDispatch , useSelector } from "react-redux";
 import { Col, Container, Row } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import "react-toastify/dist/ReactToastify.css";
 import { toastFunction } from "../../components/ToastFunction";
+import axios from "axios";
+import { createUser } from '../../store/actions/RmsActions';
 
 const Main = () => {
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.users);
   const [formData, setFormData] = useState({
     userID: "",
     firstName: "",
@@ -84,23 +89,16 @@ const Main = () => {
     return true;
   };
 
-  //handle form submit and post data
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
     try {
-      const response = await api.post("/users", formData);
-      if (response.status === 201) {
-        toastFunction("Added Details Successfully", false);
-        setFormSubmitted(true);
-      } else {
-      }
+      await dispatch(createUser(formData)); // Dispatch the createUser action with formData
     } catch (error) {
       console.error("Error:", error);
       toastFunction("Something went wrong!", true);
     }
   };
-
   //refersh page
   useEffect(() => {
     if (formSubmitted) {

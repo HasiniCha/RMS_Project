@@ -19,8 +19,9 @@ const Table = ({ columns, data,  handleCheckboxChange, checkedValues ,search}) =
           </tr>
         </thead>
         <tbody>
-          {data.filter((userdata)=>{return search.toLowerCase()===''? userdata:userdata.firstName.toLowerCase().includes(search);})
-          .map((userdata) => (
+          {data.filter((userdata)=>{ const lowercaseSearch = search.toLowerCase(); // Convert search string to lowercase
+  return lowercaseSearch === '' ? userdata : userdata.firstName.toLowerCase().includes(lowercaseSearch); // Compare lowercase search string with lowercase firstname
+}).map((userdata) => (
             <tr key={userdata.id}>
               <td style={{ display: "flex", alignItems: "center" }}>
                 <Check

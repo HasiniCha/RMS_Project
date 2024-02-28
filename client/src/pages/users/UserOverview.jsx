@@ -9,13 +9,20 @@ import TopicField from "../../components/TopicSection";
 import TextField from "../../components/TextField";
 import TableCompany from "../../components/TableRoleandCompany";
 import { useParams } from 'react-router-dom';
-// import { BASE_URL, USER_URL, api } from "../../utils/Constant";
-import api from "../../utils/Constants";
+import {BASE_URL,USER_URL,COMPANY_URL,ROLE_URL} from "../../utils/Constants";
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import {  fetchUserData ,fetchCompanyData,fetchRoleData,updateUserData} from '../../store/actions/RmsActions'; 
+import { selectUserData } from '../../store/Stores';
 
 const Data = () => {
-  const [userData, setUserData] = useState({});
-  const [companyData, setCompanyData] = useState([]);
-  const [roleData, setRoleData] = useState([]);
+  const dispatch = useDispatch();
+  const userData = useSelector(selectUserData);
+
+ 
+  const [filteredUserData, setFilteredUserData] = useState(userData);
+ 
+  
   const [checkedCompanyValues, setCheckedCompanyValues] = useState([]);
   const [checkedRoleValues, setCheckedRoleValues] = useState([]); 
   const [editMode, setEditMode] = useState(false);
@@ -63,29 +70,14 @@ const Data = () => {
 
   const fetchData = async (id) => {
     try {
-      const response = await api.get(`/users/${id}`);
-      const responseCompany = await api.get(`/company`);
-      const responseRole = await  api.get(`/roles`);
 
-      setUserData({
-        userID:response.data.email,
-        firstName: response.data.firstName,
-        lastName: response.data.lastName,
-        designation: response.data.designation,
-        email: response.data.email,
-        password:response.data.password,
-        validFrom: response.data.validFrom,
-        validTill: response.data.validTill,
-        companies:response.data.companies,
-        roles:response.data.roles
-      });
-       
-      setCompanyData(responseCompany.data);
-      setRoleData(responseRole.data);
+      dispatch(fetchUserData(id));      
+    
+   
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-    console.log("Here overView",value);
+
   };
 
   const handleSave = async () => {
@@ -93,27 +85,30 @@ const Data = () => {
       try {
         const updatedUserData = {
           id: id,
-          ...userData,
+          ...filteredUserData,
           userID:userData.email,
         };
-        await api.put(`/users/${id}`, updatedUserData);
+        await dispatch(updateUserData(id,updatedUserData));
+       
         setEditMode(false);
       } catch (error) {
         console.error("Error saving data:", error);
       }
     } else if (activeTab === "Companies") {
       const updatedUserData = {
-        ...userData,
+        ...filteredUserData,
         companies:checkedCompanyValues
       };
-      await api.put(`/users/${id}`, updatedUserData);
+   
+      await dispatch(updateUserData(id,updatedUserData));
+       
   
     } else if (activeTab === "Roles") {
       const updatedUserData = {
-        ...userData,
+        ...filteredUserData,
  roles:checkedRoleValues
       };
-      await api.put(`/users/${id}`, updatedUserData);
+      await dispatch(updateUserData(id,updatedUserData));
     }
   }
 
@@ -122,13 +117,39 @@ const Data = () => {
   };
 
   useEffect(() => {
-    fetchData(id);
-  }, []);
+    const fetchData = async () => {
+      try {
+        if (editMode === false) {
+          await dispatch(fetchUserData(id));
+          setFilteredUserData({
+            userID: userData.users.email,
+            firstName: userData.users.firstName,
+            lastName: userData.users.lastName,
+            designation: userData.users.designation,
+            email: userData.users.email,
+            password: userData.users.password,
+            validFrom: userData.users.validFrom,
+            validTill: userData.users.validTill,
+            companies: userData.users.companies,
+            roles: userData.users.roles
+          });
+        }
+        
+        dispatch(fetchCompanyData());
+        dispatch(fetchRoleData());
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData();
+  }, [dispatch, id, filteredUserData,editMode]);
+  
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    setUserData({
-      ...userData,
+    setFilteredUserData({
+      ...filteredUserData,
       [id]: value,
     });
   };
@@ -195,49 +216,49 @@ const Data = () => {
                   id="userID"
                   type="text"
                   text="User ID:"
-                  value={userData.email}
+                  value={filteredUserData.email}
                   disabled
                 />
                         <TextField
                           id="firstName"
                           type="text"
                           text="First Name:"
-                          value={userData.firstName}
+                          value={filteredUserData.firstName}
                           onChange={handleInputChange}
                         />
                         <TextField
                           id="lastName"
                           type="text"
                           text="Last Name:"
-                          value={userData.lastName}
+                          value={filteredUserData.lastName}
                           onChange={handleInputChange}
                         />
                         <TextField
                           id="designation"
                           type="text"
                           text="Designation:"
-                          value={userData.designation}
+                          value={filteredUserData.designation}
                           onChange={handleInputChange}
                         />
                         <TextField
                           id="email"
                           type="text"
                           text="Email:"
-                          value={userData.email}
+                          value={filteredUserData.email}
                           onChange={handleInputChange}
                         />
                         <TextField
                           id="validFrom"
                           type="text"
                           text="Valid From:"
-                          value={userData.validFrom}
+                          value={filteredUserData.validFrom}
                           onChange={handleInputChange}
                         />
                         <TextField
                           id="validTill"
                           type="text"
                           text="Valid Till:"
-                          value={userData.validTill}
+                          value={filteredUserData.validTill}
                           onChange={handleInputChange}
                         />
                       </>
@@ -247,49 +268,49 @@ const Data = () => {
                   id="userID"
                   type="text"
                   text="User ID:"
-                  value={userData.email}
+                  value={filteredUserData.email}
                   disabled
                 />
                         <TextField
                           id="firstName"
                           type="text"
                           text="First Name:"
-                          value={userData.firstName}
+                          value={filteredUserData.firstName}
                           disabled
                         />
                         <TextField
                           id="lastName"
                           type="text"
                           text="Last Name:"
-                          value={userData.lastName}
+                          value={filteredUserData.lastName}
                           disabled
                         />
                         <TextField
                           id="designation"
                           type="text"
                           text="Designation:"
-                          value={userData.designation}
+                          value={filteredUserData.designation}
                           disabled
                         />
                         <TextField
                           id="email"
                           type="text"
                           text="Email:"
-                          value={userData.email}
+                          value={filteredUserData.email}
                           disabled
                         />
                         <TextField
                           id="validFrom"
                           type="text"
                           text="Valid From:"
-                          value={userData.validFrom}
+                          value={filteredUserData.validFrom}
                           disabled
                         />
                         <TextField
                           id="validTill"
                           type="text"
                           text="Valid Till:"
-                          value={userData.validTill}
+                          value={filteredUserData.validTill}
                           disabled
                         />
                       </>
@@ -307,7 +328,7 @@ const Data = () => {
                 >
                   <TableCompany
                     columns={companyTableData}
-                    data={companyData}
+                    data={userData.company}
                     checkedValues={checkedCompanyValues}
                     display={display}
                     grant={(isChecked, value) => grant(isChecked, value, 'company')}
@@ -324,7 +345,7 @@ const Data = () => {
                 >
                   <TableCompany
                     columns={roleTableData}
-                    data={roleData}
+                    data={userData.roles}
                     grant={(isChecked, value) => grant(isChecked, value, 'role')}
                     display={display}
                     checkedValues={checkedRoleValues}
