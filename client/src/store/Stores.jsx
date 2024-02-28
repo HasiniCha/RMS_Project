@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { thunk } from "redux-thunk"; // Import thunk correctly
+import { thunk } from "redux-thunk";
 import { userReducer } from './reducers/RmsReducers';
 
 const middleware = [thunk];
@@ -15,5 +15,5 @@ const store = createStore(
 
 export default store;
 
-// Assuming these selectors are used to extract data from your Redux state
+
 export const selectUserData = (state) => state.userData;
