@@ -52,52 +52,97 @@ const Main = () => {
       }));
     }
   };
-  // Form validation
-  const validateForm = () => {
-    const {
-      firstName,
-      lastName,
-      designation,
-      email,
-      password,
-      validFrom,
-      validTill,
-    } = formData;
-    if (
-      !firstName ||
-      !lastName ||
-      !designation ||
-      !email ||
-      !password ||
-      !validFrom ||
-      !validTill
-    ) {
-      toastFunction("All fields are required", true);
-      return false;
-    }
+ // Form validation
+const validateForm = () => {
+  const {
+    userId,
+    firstName,
+    lastName,
+    designation,
+    email,
+    password,
+    validFrom,
+    validTill,
+  } = formData;
 
-    // Password validation
-    const passwordRegex = /^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordRegex.test(password)) {
-      toastFunction(
-        "Password must be at least 8 characters long and contain at least  one number, and one special character",
-        true
-      );
-      return false;
-    }
+  // Field validation
+  if (
+   
+    !firstName ||
+    !lastName ||
+    !designation ||
+    !email ||
+    !validFrom ||
+    !validTill
+  ) {
+    toastFunction("All fields are required", true);
+    return false;
+  }
 
-    return true;
-  };
+  // User ID validation
+  // if (userId.length < 8) {
+  //   toastFunction("User ID must be at least 8 characters long", true);
+  //   return false;
+  // }
+
+  // First Name validation
+  if (firstName.length > 20) {
+    toastFunction("First Name cannot exceed 20 characters", true);
+    return false;
+  }
+
+  // Last Name validation
+  if (lastName.length > 20) {
+    toastFunction("Last Name cannot exceed 20 characters", true);
+    return false;
+  }
+
+  // Designation validation
+  if (designation.length > 40) {
+    toastFunction("Designation cannot exceed 40 characters", true);
+    return false;
+  }
+
+  // Email validation
+  if (email.length > 50) {
+    toastFunction("Email cannot exceed 50 characters", true);
+    return false;
+  }
+
+  // Password validation
+  const passwordRegex = /^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  if (!passwordRegex.test(password)) {
+    toastFunction(
+      "Password must be at least 8 characters long and contain at least one number, and one special character",
+      true
+    );
+    return false;
+  }
+
+  // Valid From and Valid Till validation
+  const validFromDate = new Date(validFrom);
+  const validTillDate = new Date(validTill);
+  if (validTillDate <= validFromDate) {
+    toastFunction("Valid Till should be later than Valid From", true);
+    return false;
+  }
+
+  return true;
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
     try {
-      await dispatch(createUser(formData)); // Dispatch the createUser action with formData
+      await dispatch(createUser(formData)); 
+      setFormSubmitted(true);
+
     } catch (error) {
       console.error("Error:", error);
       toastFunction("Something went wrong!", true);
     }
+    setFormSubmitted(true);
   };
   //refersh page
   useEffect(() => {
@@ -107,6 +152,7 @@ const Main = () => {
       }, 1600);
     }
   }, [formSubmitted]);
+
 
   return (
     <div>

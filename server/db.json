@@ -2,7 +2,7 @@
   "users": [
     {
       "userID": "hasinichamodi4@gmail.com",
-      "firstName": "someone",
+      "firstName": "Hasini",
       "lastName": "ni",
       "designation": "fffffffffffffg",
       "email": "hasinichamodi4@gmail.com",
@@ -16,6 +16,47 @@
         "View Officer"
       ],
       "id": "e127"
+    },
+    {
+      "id": "9986",
+      "firstName": "hmmm",
+      "lastName": "nivvvvvv",
+      "designation": "fffffffffffffg",
+      "email": "hasinichamodi4@gmail.com",
+      "password": "qwertyu@1234567",
+      "validFrom": "2024-02-16T10:52",
+      "validTill": "2026-10-23T10:52",
+      "companies": "",
+      "roles": ""
+    },
+    {
+      "userID": "hasinichamodi4@gmail.com",
+      "firstName": "Someone",
+      "lastName": "ni",
+      "designation": "fffffffffffffg",
+      "email": "hasinichamodi4@gmail.com",
+      "password": "bwnfiubnwi@1234567",
+      "validFrom": "2024-02-24T03:01",
+      "validTill": "2027-10-28T11:08",
+      "companies": [
+        "ABC"
+      ],
+      "roles": [
+        "View Officer"
+      ],
+      "id": "bfab"
+    },
+    {
+      "id": "9b0a",
+      "firstName": "hasiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+      "lastName": "ni",
+      "designation": "qwerhhuib",
+      "email": "hasinichamodi4@gmail.com",
+      "password": "qwertyu@1234567",
+      "validFrom": "2024-02-13T11:09",
+      "validTill": "2027-11-28T11:09",
+      "companies": "",
+      "roles": ""
     }
   ],
   "company": [
