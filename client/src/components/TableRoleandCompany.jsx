@@ -2,7 +2,7 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Check from "../components/checkbox";
 
-const Table = ({ columns, data, grant, checkedValues }) => {
+const Table = ({ columns, data, grant, checkedValues ,grantedCodes}) => {
   return (
     <div className="d-flex align-items-stretch">
       <table className="table table-striped">
