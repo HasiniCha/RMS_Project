@@ -1,21 +1,20 @@
 {
   "users": [
     {
-      "id": "c5e7",
-      "firstName": "kkkk",
-      "lastName": "ni",
-      "defaultCompany": "0001",
+      "id": "bea4",
+      "firstName": "Sarah",
+      "lastName": "Clark",
+      "defaultCompany": "0004",
       "designation": "fffffffffffffg",
       "primaryRole": "0002",
       "email": "hasinichamodi4@gmail.com",
-      "password": "wertyu@123456789",
-      "validFrom": "2024-02-16T22:57",
-      "validTill": "2024-02-29T22:57",
-      "companies": "",
-      "roles": ""
+      "password": "qwertyui@1234567",
+      "validFrom": "2024-02-14T23:03",
+      "validTill": "2024-03-06T23:03",
+      "companies": [],
+      "roles": []
     },
     {
-      "id": "dd64",
       "userID": "hasinichamodi4@gmail.com",
       "firstName": "hasi",
       "lastName": "ni",
@@ -23,11 +22,14 @@
       "designation": "fffffffffffffg",
       "primaryRole": "0002",
       "email": "hasinichamodi4@gmail.com",
-      "password": "qwertyuio@123456789",
-      "validFrom": "2024-02-16T22:58",
-      "validTill": "2024-02-29T22:58",
-      "companies": "",
-      "roles": ""
+      "password": "qwertyui@1234567",
+      "validFrom": "2024-02-14T23:03",
+      "validTill": "2024-03-06T23:03",
+      "companies": [
+        "ABC"
+      ],
+      "roles": "",
+      "id": "bea4"
     },
     {
       "userID": "hasinichamodi4@gmail.com",
@@ -104,6 +106,14 @@
     {
       "id": "0002",
       "name": "DEF"
+    },
+    {
+      "id": "0003",
+      "name": "ABCd"
+    },
+    {
+      "id": "0004",
+      "name": "DEFg"
     }
   ],
   "roles": [
