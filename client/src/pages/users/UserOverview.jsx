@@ -140,6 +140,7 @@ const Data = () => {
         
         dispatch(fetchCompanyData());
         dispatch(fetchRoleData());
+        
 
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -365,7 +366,8 @@ const Data = () => {
                   }
                 >
                   <TableCompany
-                    grantedCodes={filteredUserData.users}
+                    grantedCodes={filteredUserData.companies}
+                    defaultValue={filteredUserData.defaultCompany}
                     columns={companyTableData}
                     data={userData.company}
                     checkedValues={checkedCompanyValues}
@@ -383,7 +385,8 @@ const Data = () => {
                   }
                 >
                   <TableCompany
-                   grantedCodess={filteredUserData.users}
+                   grantedCodes={filteredUserData.roles}
+                   defaultValue={filteredUserData.primaryRole}
                     columns={roleTableData}
                     data={userData.roles}
                     grant={(isChecked, value) => grant(isChecked, value, 'role')}

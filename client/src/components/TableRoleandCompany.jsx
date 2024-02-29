@@ -2,7 +2,9 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Check from "../components/checkbox";
 
-const Table = ({ columns, data, grant, checkedValues ,grantedCodes}) => {
+const Table = ({ columns, data, grant, checkedValues ,grantedCodes , defaultValue}) => {
+  
+  console.log(grantedCodes);
   return (
     <div className="d-flex align-items-stretch">
       <table className="table table-striped">
@@ -18,13 +20,18 @@ const Table = ({ columns, data, grant, checkedValues ,grantedCodes}) => {
             <tr key={userdata.id}>
               <td>{userdata.id}</td>
               <td>{userdata.name}</td>
-              <td>
-                <Check
-                  value={userdata.id}
-                  isChecked={checkedValues.includes(userdata.name)}
-                  onCheckboxChange={(isChecked) => grant(isChecked, userdata.name)}
-                />
-              </td>
+                <td>
+        {userdata.id === defaultValue ? (
+          <span>Default</span>
+        ) : (
+          <Check
+            grantedCodes={grantedCodes}
+            value={userdata.id}
+            isChecked={ checkedValues.includes(userdata.id)  } 
+            onCheckboxChange={(isChecked) => grant(isChecked, userdata.id)}
+          />
+        )}
+      </td>
             </tr>
           ))}
         </tbody>

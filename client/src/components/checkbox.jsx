@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Checkbox = ({ value, isChecked, onCheckboxChange }) => {
+const Checkbox = ({ value, isChecked, onCheckboxChange,grantedCodes = []}) => {
+  const initialChecked = grantedCodes.includes(value);
   const handleCheckboxChange = (e) => {
     const { checked } = e.target;
     onCheckboxChange(checked, value);
@@ -11,7 +12,7 @@ const Checkbox = ({ value, isChecked, onCheckboxChange }) => {
       <input
         type="checkbox"
         value={value}
-        checked={isChecked}
+        checked={isChecked || initialChecked}
         onChange={(e) => handleCheckboxChange(e)}
       />
     </div>
