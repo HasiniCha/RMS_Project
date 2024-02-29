@@ -29,7 +29,7 @@ const Table = ({ columns, data,  handleCheckboxChange, checkedValues ,search}) =
                   isChecked={checkedValues.includes(userdata.id)}
                   onCheckboxChange={handleCheckboxChange}
                 />
-                <div style={{ margin: "8px" }}>
+                <div style={{ margin:"14px" }}>
                 <More value={userdata.id}  />
                 </div>
               </td>

@@ -7,6 +7,7 @@ import NavLeft from "../../components/NavLeft";
 import { Container, Row } from "react-bootstrap";
 import TopicField from "../../components/TopicSection";
 import TextField from "../../components/TextField";
+import Dropdown from "../../components/DropDown";
 import TableCompany from "../../components/TableRoleandCompany";
 import { useParams } from 'react-router-dom';
 import {BASE_URL,USER_URL,COMPANY_URL,ROLE_URL} from "../../utils/Constants";
@@ -125,7 +126,9 @@ const Data = () => {
             userID: userData.users.email,
             firstName: userData.users.firstName,
             lastName: userData.users.lastName,
+            defaultCompany:userData.users.defaultCompany,
             designation: userData.users.designation,
+            primaryRole:userData.users.primaryRole,
             email: userData.users.email,
             password: userData.users.password,
             validFrom: userData.users.validFrom,
@@ -137,6 +140,7 @@ const Data = () => {
         
         dispatch(fetchCompanyData());
         dispatch(fetchRoleData());
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -151,14 +155,16 @@ const Data = () => {
     setFilteredUserData({
       ...filteredUserData,
       [id]: value,
+    
     });
+     
   };
 
   const [activeTab, setActiveTab] = useState("General");
 
-  const [roleTableData] = useState([["Role"], ["RoleName"], ["Grant"]]);
+  const [roleTableData] = useState([["Role Code"], ["Role Name"], ["Grant"]]);
   const [companyTableData] = useState([
-    ["CompanyCode"],
+    ["Company Code"],
     ["Company"],
     ["Grant"],
   ]);
@@ -233,6 +239,13 @@ const Data = () => {
                           value={filteredUserData.lastName}
                           onChange={handleInputChange}
                         />
+                         <Dropdown
+                  id="defaultCompany"
+                  text="Default Company:"
+                  options={userData.company.map(company => ({ value: company.id, label: company.name }))}
+                  selectedOption={filteredUserData.defaultCompany}
+                  handleChange={handleInputChange}
+                />
                         <TextField
                           id="designation"
                           type="text"
@@ -240,6 +253,15 @@ const Data = () => {
                           value={filteredUserData.designation}
                           onChange={handleInputChange}
                         />
+                        
+                        <Dropdown
+                  id="primaryRole"
+                  text="Primary Role:"
+                  options={userData.roles.map(role => ({ value: role.id, label: role.name }))}
+                  selectedOption={filteredUserData.primaryRole}
+                  handleChange={handleInputChange}
+                />
+
                         <TextField
                           id="email"
                           type="text"
@@ -285,11 +307,27 @@ const Data = () => {
                           value={filteredUserData.lastName}
                           disabled
                         />
+
+                       <TextField
+                          id="defaultCompany"
+                          type="text"
+                          text="Default Company:"
+                          value={filteredUserData.defaultCompany}
+                          disabled
+                        />
+                        
                         <TextField
                           id="designation"
                           type="text"
                           text="Designation:"
                           value={filteredUserData.designation}
+                          disabled
+                        />
+                         <TextField
+                          id="primaryRole"
+                          type="text"
+                          text="Primary Role:"
+                          value={filteredUserData.primaryRole}
                           disabled
                         />
                         <TextField
@@ -327,6 +365,7 @@ const Data = () => {
                   }
                 >
                   <TableCompany
+                    grantedCodes={filteredUserData.users}
                     columns={companyTableData}
                     data={userData.company}
                     checkedValues={checkedCompanyValues}
@@ -344,6 +383,7 @@ const Data = () => {
                   }
                 >
                   <TableCompany
+                   grantedCodess={filteredUserData.users}
                     columns={roleTableData}
                     data={userData.roles}
                     grant={(isChecked, value) => grant(isChecked, value, 'role')}

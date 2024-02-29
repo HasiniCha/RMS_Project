@@ -1,33 +1,42 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {BASE_URL,USER_URL} from "../../utils/Constants";
+import { BASE_URL, USER_URL } from "../../utils/Constants";
 import TextField from "../../components/TextField";
 import TopicField from "../../components/TopicSection";
 import Button from "react-bootstrap/Button";
 import NavTop from "../../components/NavTop";
 import NavLeft from "../../components/NavLeft";
-import { useDispatch , useSelector } from "react-redux";
+import Dropdown from "../../components/DropDown";
+import { useDispatch, useSelector } from "react-redux";
 import { Col, Container, Row } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import "react-toastify/dist/ReactToastify.css";
 import { toastFunction } from "../../components/ToastFunction";
 import axios from "axios";
-import { createUser } from '../../store/actions/RmsActions';
+import { createUser } from "../../store/actions/RmsActions";
+import {  fetchCompanyData,fetchRoleData} from '../../store/actions/RmsActions'; 
+import { selectUserData } from '../../store/Stores';
+
 
 const Main = () => {
   const dispatch = useDispatch();
-  const users = useSelector(state => state.users);
+  const userData = useSelector(selectUserData);
+  const [selectedOption, setSelectedOption] = useState('');
+
+
   const [formData, setFormData] = useState({
     userID: "",
     firstName: "",
     lastName: "",
+    defaultCompany:"",
     designation: "",
+    primaryRole:"",
     email: "",
     password: "",
     validFrom: "",
     validTill: "",
-    companies: "",
-    roles: "",
+    companies: [],
+    roles: [],
   });
 
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -35,14 +44,26 @@ const Main = () => {
   //input_change
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-
-    // Check if the input being changed is the email field
-    if (id === "email") {
+    if (id === "defaultCompany" ) {
+     
+      setFormData((prevState) => ({
+        ...prevState,
+        [id]: value,
+        companies: [...prevState.companies, value]
+      }));
+    }else if (id === "primaryRole") {
+      // If it's the email field, update both email and userID with the same value
+      setFormData((prevState) => ({
+        ...prevState,
+        [id]: value,
+        roles:[...prevState.roles,value]
+      }));
+    }else if (id === "email") {
       // If it's the email field, update both email and userID with the same value
       setFormData((prevState) => ({
         ...prevState,
         email: value,
-        userID: value, 
+        userID: value,
       }));
     } else {
       // For other fields, update normally
@@ -52,92 +73,91 @@ const Main = () => {
       }));
     }
   };
- // Form validation
-const validateForm = () => {
-  const {
-    userId,
-    firstName,
-    lastName,
-    designation,
-    email,
-    password,
-    validFrom,
-    validTill,
-  } = formData;
+  // Form validation
+  const validateForm = () => {
+    const {
+      userId,
+      firstName,
+      lastName,
+      defaultCompany,
+      designation,
+      primaryRole,
+      email,
+      password,
+      validFrom,
+      validTill,
+    } = formData;
 
-  // Field validation
-  if (
-   
-    !firstName ||
-    !lastName ||
-    !designation ||
-    !email ||
-    !validFrom ||
-    !validTill
-  ) {
-    toastFunction("All fields are required", true);
-    return false;
-  }
+    // Field validation
+    if (
+      !firstName ||
+      !lastName ||
+      !designation ||
+      !email ||
+      !validFrom ||
+      !validTill
+    ) {
+      toastFunction("All fields are required", true);
+      return false;
+    }
 
-  // User ID validation
-  // if (userId.length < 8) {
-  //   toastFunction("User ID must be at least 8 characters long", true);
-  //   return false;
-  // }
+    // User ID validation
+    // if (userId.length < 8) {
+    //   toastFunction("User ID must be at least 8 characters long", true);
+    //   return false;
+    // }
 
-  // First Name validation
-  if (firstName.length > 20) {
-    toastFunction("First Name cannot exceed 20 characters", true);
-    return false;
-  }
+    // First Name validation
+    if (firstName.length > 20) {
+      toastFunction("First Name cannot exceed 20 characters", true);
+      return false;
+    }
 
-  // Last Name validation
-  if (lastName.length > 20) {
-    toastFunction("Last Name cannot exceed 20 characters", true);
-    return false;
-  }
+    // Last Name validation
+    if (lastName.length > 20) {
+      toastFunction("Last Name cannot exceed 20 characters", true);
+      return false;
+    }
 
-  // Designation validation
-  if (designation.length > 40) {
-    toastFunction("Designation cannot exceed 40 characters", true);
-    return false;
-  }
+    // Designation validation
+    if (designation.length > 40) {
+      toastFunction("Designation cannot exceed 40 characters", true);
+      return false;
+    }
 
-  // Email validation
-  if (email.length > 50) {
-    toastFunction("Email cannot exceed 50 characters", true);
-    return false;
-  }
+    // Email validation
+    if (email.length > 50) {
+      toastFunction("Email cannot exceed 50 characters", true);
+      return false;
+    }
 
-  // Password validation
-  const passwordRegex = /^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  if (!passwordRegex.test(password)) {
-    toastFunction(
-      "Password must be at least 8 characters long and contain at least one number, and one special character",
-      true
-    );
-    return false;
-  }
+    // Password validation
+    const passwordRegex = /^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      toastFunction(
+        "Password must be at least 8 characters long and contain at least one number, and one special character",
+        true
+      );
+      return false;
+    }
 
-  // Valid From and Valid Till validation
-  const validFromDate = new Date(validFrom);
-  const validTillDate = new Date(validTill);
-  if (validTillDate <= validFromDate) {
-    toastFunction("Valid Till should be later than Valid From", true);
-    return false;
-  }
+    // Valid From and Valid Till validation
+    const validFromDate = new Date(validFrom);
+    const validTillDate = new Date(validTill);
+    if (validTillDate <= validFromDate) {
+      toastFunction("Valid Till should be later than Valid From", true);
+      return false;
+    }
 
-  return true;
-};
-
+    return true;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
     try {
-      await dispatch(createUser(formData)); 
+      await dispatch(createUser(formData));
       setFormSubmitted(true);
-
     } catch (error) {
       console.error("Error:", error);
       toastFunction("Something went wrong!", true);
@@ -151,8 +171,9 @@ const validateForm = () => {
         window.location.reload();
       }, 1600);
     }
+    dispatch(fetchCompanyData());
+    dispatch(fetchRoleData());
   }, [formSubmitted]);
-
 
   return (
     <div>
@@ -194,11 +215,25 @@ const validateForm = () => {
                   text="Last Name:"
                   onChange={handleInputChange}
                 />
+                   <Dropdown
+                  id="defaultCompany"
+                  text="Default Company:"
+                  options={userData.company.map(company => ({ value: company.id, label: company.name }))}
+                  selectedOption={formData.defaultCompany}
+                  handleChange={handleInputChange}
+                />
                 <TextField
                   id="designation"
                   type="text"
                   text="Designation:"
                   onChange={handleInputChange}
+                />
+                   <Dropdown
+                  id="primaryRole"
+                  text="Primary Role:"
+                  options={userData.roles.map(role => ({ value: role.id, label: role.name }))}
+                  selectedOption={formData.primaryRole}
+                  handleChange={handleInputChange}
                 />
                 <TextField
                   id="email"
