@@ -1,20 +1,18 @@
-import React from 'react';
+import React from "react";
 
 const SearchBar = ({ search, setSearch }) => {
-  
-  
   const handleSearch = (event) => {
     setSearch(event.target.value);
     console.log(search);
   };
   return (
-    <div style={{ width: '300px' }}>
-      <form  style={{ display: 'inline-block', width: '70%' }}>
+    <div style={{ width: "300px" }}>
+      <form style={{ display: "inline-block", width: "70%" }}>
         <input
           type="text"
           placeholder="Search..."
           onChange={handleSearch}
-          style={{ width: '100%', height: '30px', boxSizing: 'border-box' }}
+          style={{ width: "100%", height: "30px", boxSizing: "border-box" }}
         />
       </form>
       {/* <button

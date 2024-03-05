@@ -10,7 +10,7 @@ import store from './store/Stores'
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
+export const BASE_URL = process.env.REACT_APP_BASE_URL;
 root.render(
   <React.StrictMode>
     <Provider store={store}>

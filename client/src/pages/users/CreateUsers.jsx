@@ -107,29 +107,7 @@ const Main = () => {
     //   return false;
     // }
 
-    // First Name validation
-    if (firstName.length > 20) {
-      toastFunction("First Name cannot exceed 20 characters", true);
-      return false;
-    }
-
-    // Last Name validation
-    if (lastName.length > 20) {
-      toastFunction("Last Name cannot exceed 20 characters", true);
-      return false;
-    }
-
-    // Designation validation
-    if (designation.length > 40) {
-      toastFunction("Designation cannot exceed 40 characters", true);
-      return false;
-    }
-
-    // Email validation
-    if (email.length > 50) {
-      toastFunction("Email cannot exceed 50 characters", true);
-      return false;
-    }
+  
 
     // Password validation
     const passwordRegex = /^(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -202,18 +180,22 @@ const Main = () => {
                   value={formData.userID}
                   onChange={handleInputChange}
                   disabled={true}
+                  maxlength={50} 
+                 
                 />
                 <TextField
                   id="firstName"
                   type="text"
                   text="First Name:"
                   onChange={handleInputChange}
+                  maxlength={20} 
                 />
                 <TextField
                   id="lastName"
                   type="text"
                   text="Last Name:"
                   onChange={handleInputChange}
+                  maxlength={20} 
                 />
                    <Dropdown
                   id="defaultCompany"
@@ -227,6 +209,7 @@ const Main = () => {
                   type="text"
                   text="Designation:"
                   onChange={handleInputChange}
+                  maxlength={40} 
                 />
                    <Dropdown
                   id="primaryRole"
@@ -240,6 +223,7 @@ const Main = () => {
                   type="email"
                   text="Email:"
                   onChange={handleInputChange}
+                  maxlength={50} 
                 />
                 <TextField
                   id="password"

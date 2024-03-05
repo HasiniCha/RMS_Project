@@ -1,9 +1,15 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Check from "../components/checkbox";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Check from "./checkbox";
 
-const Table = ({ columns, data, grant, checkedValues ,grantedCodes , defaultValue}) => {
-  
+const Table = ({
+  columns,
+  data,
+  grant,
+  checkedValues,
+  grantedCodes,
+  defaultValue,
+}) => {
   console.log(grantedCodes);
   return (
     <div className="d-flex align-items-stretch">
@@ -20,24 +26,26 @@ const Table = ({ columns, data, grant, checkedValues ,grantedCodes , defaultValu
             <tr key={userdata.id}>
               <td>{userdata.id}</td>
               <td>{userdata.name}</td>
-                <td>
-        {userdata.id === defaultValue ? (
-          <span>Default</span>
-        ) : (
-          <Check
-            grantedCodes={grantedCodes}
-            value={userdata.id}
-            isChecked={ checkedValues.includes(userdata.id)  } 
-            onCheckboxChange={(isChecked) => grant(isChecked, userdata.id)}
-          />
-        )}
-      </td>
+              <td>
+                {userdata.id === defaultValue ? (
+                  <span>Default</span>
+                ) : (
+                  <Check
+                    grantedCodes={grantedCodes}
+                    value={userdata.id}
+                    isChecked={checkedValues.includes(userdata.id)}
+                    onCheckboxChange={(isChecked) =>
+                      grant(isChecked, userdata.id)
+                    }
+                  />
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
   );
-}
+};
 
 export default Table;

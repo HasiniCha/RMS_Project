@@ -60,6 +60,7 @@ const Data = () => {
 
   const handleGrant = () => {
     checkedCompanyValues.forEach((id) => Displaygranted(id));
+    
     checkedRoleValues.forEach((id) => Displaygranted(id));
   };
 
