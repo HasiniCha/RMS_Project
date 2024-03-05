@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const TextField = ({ id, type, text, value, onChange, disabled }) => {
+const TextField = ({ id, type, text, value, onChange, disabled,maxlength }) => {
   return (
     <div className="mb-3 row">
       <label htmlFor={id} className="col-sm-2 col-form-label">
@@ -16,6 +16,7 @@ const TextField = ({ id, type, text, value, onChange, disabled }) => {
           value={value}
           onChange={onChange}
           disabled={disabled}
+          maxlength={maxlength} 
         />
       </div>
     </div>

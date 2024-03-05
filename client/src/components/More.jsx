@@ -1,32 +1,22 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-
-
-
-const More = ({value}) => {
+const More = ({ value }) => {
   const [showEditBox, setShowEditBox] = useState(false);
   const [ClickedValue, setClickedValue] = useState("");
   const navigate = useNavigate();
 
-
-
   const handleArrowClick = () => {
     navigate(`/useroverview/${ClickedValue}`);
-    console.log("Here table click:",ClickedValue);
-};
-
- 
-
+    console.log("Here table click:", ClickedValue);
+  };
 
   const handleDivClick = (value) => {
     setClickedValue(value);
     setShowEditBox(!showEditBox);
     console.log("Here is in div click:", ClickedValue);
-    
   };
-                
-  
+
   return (
     <div style={{ position: "relative" }} onClick={() => handleDivClick(value)}>
       <svg
@@ -36,7 +26,6 @@ const More = ({value}) => {
         fill="currentColor"
         className="bi bi-three-dots"
         viewBox="0 0 16 16"
-      
       >
         <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
       </svg>
@@ -54,7 +43,6 @@ const More = ({value}) => {
             alignItems: "center",
           }}
         >
-         
           <div onClick={handleArrowClick}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

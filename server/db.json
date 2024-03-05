@@ -1,101 +1,40 @@
 {
   "users": [
     {
-      "id": "bea4",
-      "firstName": "Sarah",
-      "lastName": "Clark",
-      "defaultCompany": "0004",
-      "designation": "fffffffffffffg",
-      "primaryRole": "0002",
-      "email": "hasinichamodi4@gmail.com",
-      "password": "qwertyui@1234567",
-      "validFrom": "2024-02-14T23:03",
-      "validTill": "2024-03-06T23:03",
-      "companies": [],
-      "roles": []
-    },
-    {
       "userID": "hasinichamodi4@gmail.com",
-      "firstName": "hasi",
-      "lastName": "ni",
+      "firstName": "jhgf",
+      "lastName": "chamodi",
       "defaultCompany": "0001",
-      "designation": "fffffffffffffg",
-      "primaryRole": "0002",
-      "email": "hasinichamodi4@gmail.com",
-      "password": "qwertyui@1234567",
-      "validFrom": "2024-02-14T23:03",
-      "validTill": "2024-03-06T23:03",
-      "companies": [
-        "ABC"
-      ],
-      "roles": "",
-      "id": "bea4"
-    },
-    {
-      "userID": "hasinichamodi4@gmail.com",
-      "firstName": "hasi",
-      "lastName": "ni",
-      "defaultCompany": "0001",
-      "designation": "fffffffffffffg",
-      "primaryRole": "0002",
-      "email": "hasinichamodi4@gmail.com",
-      "password": "qwertyui@1234567",
-      "validFrom": "2024-02-14T23:03",
-      "validTill": "2024-03-06T23:03",
-      "companies": [
-        "ABC"
-      ],
-      "roles": "",
-      "id": "bea4"
-    },
-    {
-      "id": "9625",
-      "userID": "hasinichamodi4@gmail.com",
-      "firstName": "new",
-      "lastName": "ni",
-      "defaultCompany": "0001",
-      "designation": "fffffffffffffg",
+      "designation": "Receptionist",
       "primaryRole": "0001",
       "email": "hasinichamodi4@gmail.com",
-      "password": "qwert@123456",
-      "validFrom": "2024-03-20T00:00",
-      "validTill": "2024-04-03T00:00",
-      "companies": "0001",
-      "roles": "0001"
-    },
-    {
-      "id": "48d5",
-      "userID": "hasinichamodi4@gmail.com",
-      "firstName": "hasi",
-      "lastName": "ni",
-      "defaultCompany": "0002",
-      "designation": "fffffffffffffg",
-      "primaryRole": "0001",
-      "email": "hasinichamodi4@gmail.com",
-      "password": "qrf@12345678",
-      "validFrom": "2024-03-14T00:01",
-      "validTill": "2024-04-03T00:01",
-      "companies": "0002",
-      "roles": "0001"
-    },
-    {
-      "id": "7274",
-      "userID": "hasinichamodi4@gmail.com",
-      "firstName": "hasi",
-      "lastName": "ni",
-      "defaultCompany": "0001",
-      "designation": "fffffffffffffg",
-      "primaryRole": "0001",
-      "email": "hasinichamodi4@gmail.com",
-      "password": "dcnoa@123456",
-      "validFrom": "2024-03-16T00:04",
-      "validTill": "2024-04-03T00:04",
+      "password": "qwert@123457",
+      "validFrom": "2024-03-06T13:34",
+      "validTill": "2024-03-29T13:34",
       "companies": [
-        "0001"
+        "0002"
       ],
       "roles": [
+        "0002"
+      ],
+      "id": "fd13"
+    },
+    {
+      "userID": "hasinichamodi4@gmail.com",
+      "firstName": "ffffffffffffffffffff",
+      "lastName": "ni",
+      "defaultCompany": "0002",
+      "designation": "Receptionist",
+      "primaryRole": "",
+      "email": "hasinichamodi4@gmail.com",
+      "password": "qwetr@1234",
+      "validFrom": "2024-03-05T09:50",
+      "validTill": "2024-04-02T09:50",
+      "companies": [],
+      "roles": [
         "0001"
-      ]
+      ],
+      "id": "244e"
     }
   ],
   "company": [
