@@ -3,7 +3,7 @@ import React from "react";
 const SearchBar = ({ search, setSearch }) => {
   const handleSearch = (event) => {
     setSearch(event.target.value);
-    console.log(search);
+   
   };
   return (
     <div style={{ width: "300px" }}>
