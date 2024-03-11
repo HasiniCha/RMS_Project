@@ -9,36 +9,39 @@ import TopicField from "../../components/TopicSection";
 import TextField from "../../components/TextField";
 import Dropdown from "../../components/DropDown";
 import TableCompany from "../../components/TableRoleandCompany";
-import { useParams } from 'react-router-dom';
-import {BASE_URL,USER_URL,COMPANY_URL,ROLE_URL} from "../../utils/Constants";
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import {  fetchUserData ,fetchCompanyData,fetchRoleData,updateUserData} from '../../store/actions/RmsActions'; 
-import { selectUserData } from '../../store/Stores';
+import { useParams } from "react-router-dom";
+import {
+  BASE_URL,
+  USER_URL,
+  COMPANY_URL,
+  ROLE_URL,
+} from "../../utils/Constants";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchUserData,
+  fetchCompanyData,
+  fetchRoleData,
+  updateUserData,
+} from "../../store/actions/RmsActions";
+import { selectUserData } from "../../store/Stores";
 
 const Data = () => {
   const dispatch = useDispatch();
   const userData = useSelector(selectUserData);
 
- 
   const [filteredUserData, setFilteredUserData] = useState(userData);
- 
-  
+
   const [checkedCompanyValues, setCheckedCompanyValues] = useState([]);
-  const [checkedRoleValues, setCheckedRoleValues] = useState([]); 
+  const [checkedRoleValues, setCheckedRoleValues] = useState([]);
   const [editMode, setEditMode] = useState(false);
 
   const [display, setDisplay] = useState([false]);
-  
- 
+
   let { value } = useParams();
 
-  
-
-
-
   const grant = (isChecked, value, table) => {
-    if (table === 'company') {
+    if (table === "company") {
       if (isChecked) {
         setCheckedCompanyValues((prevValues) => [...prevValues, value]);
       } else {
@@ -46,7 +49,7 @@ const Data = () => {
           prevValues.filter((val) => val !== value)
         );
       }
-    } else if (table === 'role') {
+    } else if (table === "role") {
       if (isChecked) {
         setCheckedRoleValues((prevValues) => [...prevValues, value]);
       } else {
@@ -60,7 +63,7 @@ const Data = () => {
 
   const handleGrant = () => {
     checkedCompanyValues.forEach((id) => Displaygranted(id));
-    
+
     checkedRoleValues.forEach((id) => Displaygranted(id));
   };
 
@@ -72,14 +75,10 @@ const Data = () => {
 
   const fetchData = async (id) => {
     try {
-
-      dispatch(fetchUserData(id));      
-    
-   
+      dispatch(fetchUserData(id));
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-
   };
 
   const handleSave = async () => {
@@ -88,10 +87,10 @@ const Data = () => {
         const updatedUserData = {
           id: id,
           ...filteredUserData,
-          userID:userData.email,
+          userID: userData.email,
         };
-        await dispatch(updateUserData(id,updatedUserData));
-       
+        await dispatch(updateUserData(id, updatedUserData));
+
         setEditMode(false);
       } catch (error) {
         console.error("Error saving data:", error);
@@ -99,20 +98,18 @@ const Data = () => {
     } else if (activeTab === "Companies") {
       const updatedUserData = {
         ...filteredUserData,
-        companies:checkedCompanyValues
+        companies: checkedCompanyValues,
       };
-   
-      await dispatch(updateUserData(id,updatedUserData));
-       
-  
+
+      await dispatch(updateUserData(id, updatedUserData));
     } else if (activeTab === "Roles") {
       const updatedUserData = {
         ...filteredUserData,
- roles:checkedRoleValues
+        roles: checkedRoleValues,
       };
-      await dispatch(updateUserData(id,updatedUserData));
+      await dispatch(updateUserData(id, updatedUserData));
     }
-  }
+  };
 
   const handleEditClick = () => {
     setEditMode(true);
@@ -127,39 +124,34 @@ const Data = () => {
             userID: userData.users.email,
             firstName: userData.users.firstName,
             lastName: userData.users.lastName,
-            defaultCompany:userData.users.defaultCompany,
+            defaultCompany: userData.users.defaultCompany,
             designation: userData.users.designation,
-            primaryRole:userData.users.primaryRole,
+            primaryRole: userData.users.primaryRole,
             email: userData.users.email,
             password: userData.users.password,
             validFrom: userData.users.validFrom,
             validTill: userData.users.validTill,
             companies: userData.users.companies,
-            roles: userData.users.roles
+            roles: userData.users.roles,
           });
         }
-        
+
         dispatch(fetchCompanyData());
         dispatch(fetchRoleData());
-        
-
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchData();
-  }, [dispatch, id, filteredUserData,editMode]);
-  
+  }, [dispatch, id, filteredUserData, editMode]);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFilteredUserData({
       ...filteredUserData,
       [id]: value,
-    
     });
-     
   };
 
   const [activeTab, setActiveTab] = useState("General");
@@ -194,12 +186,11 @@ const Data = () => {
                 showInputGroup1={false}
                 showInputGroup2={true}
                 showCreate={activeTab === "General" ? true : false}
-                showEdit={activeTab === "General" ? !editMode:false}
-                showSave={activeTab === "General" ? editMode:true}
+                showEdit={activeTab === "General" ? !editMode : false}
+                showSave={activeTab === "General" ? editMode : true}
                 showDelete={false}
                 SaveClick={handleSave}
                 EditClick={handleEditClick}
-           
               />
               <Tabs
                 id="fill-tab-example"
@@ -220,13 +211,13 @@ const Data = () => {
                   <div style={{ margin: 10, padding: 20 }}>
                     {editMode ? (
                       <>
-      <TextField
-                  id="userID"
-                  type="text"
-                  text="User ID:"
-                  value={filteredUserData.email}
-                  disabled
-                />
+                        <TextField
+                          id="userID"
+                          type="text"
+                          text="User ID:"
+                          value={filteredUserData.email}
+                          disabled
+                        />
                         <TextField
                           id="firstName"
                           type="text"
@@ -241,13 +232,16 @@ const Data = () => {
                           value={filteredUserData.lastName}
                           onChange={handleInputChange}
                         />
-                         <Dropdown
-                  id="defaultCompany"
-                  text="Default Company:"
-                  options={userData.company.map(company => ({ value: company.id, label: company.name }))}
-                  selectedOption={filteredUserData.defaultCompany}
-                  handleChange={handleInputChange}
-                />
+                        <Dropdown
+                          id="defaultCompany"
+                          text="Default Company:"
+                          options={userData.company.map((company) => ({
+                            value: company.id,
+                            label: company.name,
+                          }))}
+                          selectedOption={filteredUserData.defaultCompany}
+                          handleChange={handleInputChange}
+                        />
                         <TextField
                           id="designation"
                           type="text"
@@ -255,14 +249,17 @@ const Data = () => {
                           value={filteredUserData.designation}
                           onChange={handleInputChange}
                         />
-                        
+
                         <Dropdown
-                  id="primaryRole"
-                  text="Primary Role:"
-                  options={userData.roles.map(role => ({ value: role.id, label: role.name }))}
-                  selectedOption={filteredUserData.primaryRole}
-                  handleChange={handleInputChange}
-                />
+                          id="primaryRole"
+                          text="Primary Role:"
+                          options={userData.roles.map((role) => ({
+                            value: role.id,
+                            label: role.name,
+                          }))}
+                          selectedOption={filteredUserData.primaryRole}
+                          handleChange={handleInputChange}
+                        />
 
                         <TextField
                           id="email"
@@ -288,13 +285,13 @@ const Data = () => {
                       </>
                     ) : (
                       <>
-                      <TextField
-                  id="userID"
-                  type="text"
-                  text="User ID:"
-                  value={filteredUserData.email}
-                  disabled
-                />
+                        <TextField
+                          id="userID"
+                          type="text"
+                          text="User ID:"
+                          value={filteredUserData.email}
+                          disabled
+                        />
                         <TextField
                           id="firstName"
                           type="text"
@@ -310,14 +307,14 @@ const Data = () => {
                           disabled
                         />
 
-                       <TextField
+                        <TextField
                           id="defaultCompany"
                           type="text"
                           text="Default Company:"
                           value={filteredUserData.defaultCompany}
                           disabled
                         />
-                        
+
                         <TextField
                           id="designation"
                           type="text"
@@ -325,7 +322,7 @@ const Data = () => {
                           value={filteredUserData.designation}
                           disabled
                         />
-                         <TextField
+                        <TextField
                           id="primaryRole"
                           type="text"
                           text="Primary Role:"
@@ -366,14 +363,16 @@ const Data = () => {
                       : null
                   }
                 >
-                  <TableCompany
+                  <TableCompany 
                     grantedCodes={filteredUserData.companies}
                     defaultValue={filteredUserData.defaultCompany}
                     columns={companyTableData}
                     data={userData.company}
                     checkedValues={checkedCompanyValues}
                     display={display}
-                    grant={(isChecked, value) => grant(isChecked, value, 'company')}
+                    grant={(isChecked, value) =>
+                      grant(isChecked, value, "company")
+                    }
                   />
                 </Tab>
                 <Tab
@@ -386,11 +385,13 @@ const Data = () => {
                   }
                 >
                   <TableCompany
-                   grantedCodes={filteredUserData.roles}
-                   defaultValue={filteredUserData.primaryRole}
+                    grantedCodes={filteredUserData.roles}
+                    defaultValue={filteredUserData.primaryRole}
                     columns={roleTableData}
                     data={userData.roles}
-                    grant={(isChecked, value) => grant(isChecked, value, 'role')}
+                    grant={(isChecked, value) =>
+                      grant(isChecked, value, "role")
+                    }
                     display={display}
                     checkedValues={checkedRoleValues}
                   />

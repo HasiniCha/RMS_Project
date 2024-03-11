@@ -1,22 +1,23 @@
 {
   "users": [
     {
-      "id": "fd13",
+      "userID": "hasinichamodi4@gmail.com",
       "firstName": "Emily",
       "lastName": "Clark",
-      "defaultCompany": "0001",
+      "defaultCompany": "0002",
       "designation": "Receptionist",
-      "primaryRole": "0001",
+      "primaryRole": "0002",
       "email": "hasinichamodi4@gmail.com",
       "password": "qwert@123457",
       "validFrom": "2024-03-06T13:34",
       "validTill": "2024-03-29T13:34",
       "companies": [
-        "0002"
+        "0001"
       ],
       "roles": [
-        "0002"
-      ]
+        "0001"
+      ],
+      "id": "fd13"
     },
     {
       "id": "244e",
