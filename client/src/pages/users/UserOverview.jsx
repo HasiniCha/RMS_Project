@@ -2,20 +2,20 @@ import React, { useState, useEffect } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import { Col } from "react-bootstrap";
-import NavTop from "../../components/NavTop";
-import NavLeft from "../../components/NavLeft";
+import NavTop from "../../../../client/src/components/NavTop";
+import NavLeft from "../../../../client/src/components/NavLeft";
 import { Container, Row } from "react-bootstrap";
-import TopicField from "../../components/TopicSection";
-import TextField from "../../components/TextField";
-import Dropdown from "../../components/DropDown";
-import TableCompany from "../../components/TableRoleandCompany";
+import TopicField from "../../../../client/src/components/TopicSection";
+import TextField from "../../../../client/src/components/TextField";
+import Dropdown from "../../../../client/src/components/DropDown";
+import TableCompany from "../../../../client/src/components/TableRoleandCompany";
 import { useParams } from "react-router-dom";
 import {
   BASE_URL,
   USER_URL,
   COMPANY_URL,
   ROLE_URL,
-} from "../../utils/Constants";
+} from "../../../../client/src/utils/Constants";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -23,8 +23,8 @@ import {
   fetchCompanyData,
   fetchRoleData,
   updateUserData,
-} from "../../store/actions/RmsActions";
-import { selectUserData } from "../../store/Stores";
+} from "../../../../client/src/store/actions/RmsActions";
+import { selectUserData } from "../../../../client/src/store/Stores";
 
 const Data = () => {
   const dispatch = useDispatch();

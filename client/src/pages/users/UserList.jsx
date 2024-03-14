@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import TopicField from "../../components/TopicSection";
+import TopicField from "../../../../client/src/components/TopicSection";
 import { Col } from "react-bootstrap";
-import NavTop from "../../components/NavTop";
-import NavLeft from "../../components/NavLeft";
-import Table from "../../components/Table";
+import NavTop from "../../../../client/src/components/NavTop";
+import NavLeft from "../../../../client/src/components/NavLeft";
+import Table from "../../../../client/src/components/Table";
 import { Container,Row, } from "react-bootstrap";
-import {toastFunction} from '../../components/ToastFunction';
-import {BASE_URL, USER_URL} from "../../utils/Constants";
+import {toastFunction} from '../../../../client/src/components/ToastFunction';
+import {BASE_URL, USER_URL} from "../../../../client/src/utils/Constants";
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchData,deleteUser } from '../../store/actions/RmsActions'; 
-import { selectUserData } from '../../store/Stores';
+import { fetchData,deleteUser } from '../../../../client/src/store/actions/RmsActions'; 
+import { selectUserData } from '../../../../client/src/store/Stores';
 
 
 const Main = () => {
