@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BASE_URL, USER_URL } from "../../utils/Constants";
+import { BASE_URL, USER_URL } from "../../../../client/src/utils/Constants";
 import TextField from "../../components/TextField";
 import TopicField from "../../components/TopicSection";
 import Button from "react-bootstrap/Button";
@@ -13,9 +13,9 @@ import { Form } from "react-bootstrap";
 import "react-toastify/dist/ReactToastify.css";
 import { toastFunction } from "../../components/ToastFunction";
 import axios from "axios";
-import { createUser } from "../../store/actions/RmsActions";
-import {  fetchCompanyData,fetchRoleData} from '../../store/actions/RmsActions'; 
-import { selectUserData } from '../../store/Stores';
+import { createUser } from "../../../../client/src/store/actions/RmsActions";
+import {  fetchCompanyData,fetchRoleData} from '../../../../client/src/store/actions/RmsActions'; 
+import { selectUserData } from '../../../../client/src/store/Stores';
 
 
 const Main = () => {
